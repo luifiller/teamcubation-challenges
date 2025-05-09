@@ -9,61 +9,65 @@ func inverterOrdem(frase string) string {
 	fmt.Println("Invertendo ordem... ")
 	palavras := strings.Split(frase, " ")
 
-	var fraseInvertida string
+	var resultado strings.Builder
+	resultado.Grow(len(palavras))
+
 	for i := len(palavras) - 1; i >= 0; i-- {
-		fraseInvertida += palavras[i]
+		resultado.WriteString(palavras[i])
 
 		if i != 0 {
-			fraseInvertida += " "
+			resultado.WriteString(" ")
 		}
 	}
 
-	return fraseInvertida
+	return resultado.String()
 }
 
 func inverterCaracteres(frase string) string {
 	fmt.Println("Invertendo caracteres...")
 	palavras := strings.Split(frase, " ")
+	var resultado strings.Builder
 
-	var fraseFormatada string
-	for index, palavra := range palavras {
+	for i, palavra := range palavras {
 		runas := []rune(palavra)
 
-		var palavraInvertida string
-		for i := len(runas) - 1; i >= 0; i-- {
-			palavraInvertida += string(runas[i])
-
+		var palavraInvertida strings.Builder
+		palavraInvertida.Grow(len(runas))
+		for j := len(runas) - 1; j >= 0; j-- {
+			palavraInvertida.WriteRune(runas[j])
 		}
 
-		if index != 0 {
-			fraseFormatada += " "
+		if i != 0 {
+			resultado.WriteString(" ")
 		}
-		fraseFormatada += palavraInvertida
+
+		resultado.WriteString(palavraInvertida.String())
 	}
 
-	return fraseFormatada
+	return resultado.String()
 }
 
 func inverterOrdemECaracteres(frase string) string {
 	fmt.Println("Invertendo ordem e caracteres...")
 	palavras := strings.Split(frase, " ")
 
-	var fraseFormatada string
+	var resultado strings.Builder
+	resultado.Grow(len(palavras))
 	for i := len(palavras) - 1; i >= 0; i-- {
 		runas := []rune(palavras[i])
 
-		var palavraInvertida string
+		var palavraInvertida strings.Builder
 		for j := len(runas) - 1; j >= 0; j-- {
-			palavraInvertida += string(runas[j])
+			palavraInvertida.WriteRune(runas[j])
 		}
 
-		fraseFormatada += palavraInvertida
+		resultado.WriteString(palavraInvertida.String())
 		if i != 0 {
-			fraseFormatada += " "
+			resultado.WriteString(" ")
 		}
 	}
 
-	return fraseFormatada
+	return resultado.String()
 }
 
 func inverterAcumulando(frase string) string {
