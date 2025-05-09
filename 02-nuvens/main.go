@@ -9,8 +9,16 @@ import (
 )
 
 func main() {
+	numNuvens := lerQtdNuvens()
+	estadosNuvens := lerEstadosDasNuvens(numNuvens)
+
+	saltos := saltarEmNuvens(estadosNuvens)
+	fmt.Printf("Número de saltos: %d \n", saltos)
+}
+
+func lerQtdNuvens() int {
 	reader := bufio.NewReader(os.Stdin)
-	var numNuvens int
+
 	for {
 		fmt.Println("+----------------------------------------------------------+")
 		fmt.Println("|                    VIAJANTE DAS NUVENS                   |")
@@ -24,7 +32,7 @@ func main() {
 		}
 
 		qtdNuvens = strings.TrimSpace(qtdNuvens)
-		numNuvens, err = strconv.Atoi(qtdNuvens)
+		numNuvens, err := strconv.Atoi(qtdNuvens)
 		if err != nil {
 			fmt.Println("Erro ao converter string em integer.")
 			continue
@@ -35,11 +43,15 @@ func main() {
 			continue
 		}
 
-		break
+		return numNuvens
 	}
+}
+
+func lerEstadosDasNuvens(qtdNuvens int) []int {
+	reader := bufio.NewReader(os.Stdin)
 
 	for {
-		fmt.Printf("Insira os %d estados das nuvens (0 = segura, 1 = perigosa), separados por espaço: ", numNuvens)
+		fmt.Printf("Insira os %d estados das nuvens (0 = segura, 1 = perigosa), separados por espaço: ", qtdNuvens)
 		estadosNuvens, err := reader.ReadString('\n')
 		if err != nil {
 			fmt.Println("Erro ao ler os estados das nuvens.")
@@ -48,14 +60,14 @@ func main() {
 
 		estadosNuvens = strings.TrimSpace(estadosNuvens)
 		estadosString := strings.Split(estadosNuvens, " ")
-		if len(estadosString) != numNuvens {
+		if len(estadosString) != qtdNuvens {
 			fmt.Println("Quantidade de estados diferente da quantidade de nuvens informada previamente.")
 			continue
 		}
 
 		valid := true
 
-		estadosNuvensInt := make([]int, numNuvens)
+		estadosNuvensInt := make([]int, qtdNuvens)
 		for i, estado := range estadosString {
 			estadoInt, err := strconv.Atoi(estado)
 
@@ -72,14 +84,12 @@ func main() {
 			continue
 		}
 
-		if estadosNuvensInt[0] != 0 || estadosNuvensInt[numNuvens-1] != 0 {
+		if estadosNuvensInt[0] != 0 || estadosNuvensInt[qtdNuvens-1] != 0 {
 			fmt.Println("A primeira e a última nuvem devem ser seguras (0).")
 			continue
 		}
 
-		saltos := saltarEmNuvens(estadosNuvensInt)
-		fmt.Printf("Número de saltos: %d \n", saltos)
-		break
+		return estadosNuvensInt
 	}
 }
 
