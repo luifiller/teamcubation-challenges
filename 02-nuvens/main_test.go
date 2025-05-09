@@ -70,7 +70,7 @@ func TestLerQtdNuvens(t *testing.T) {
 
 			// Assert
 			if result != tt.resultadoEsperado {
-				t.Errorf("lerQtdNuvens() = %d, esperado %d", result, tt.resultadoEsperado)
+				t.Errorf("[Erro lerQtdNuvens()] resulado foi %d, mas o esperado era %d", result, tt.resultadoEsperado)
 			}
 		})
 	}
