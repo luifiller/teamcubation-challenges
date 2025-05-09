@@ -29,19 +29,13 @@ func inverterCaracteres(frase string) string {
 	var resultado strings.Builder
 
 	for i, palavra := range palavras {
-		runas := []rune(palavra)
-
-		var palavraInvertida strings.Builder
-		palavraInvertida.Grow(len(runas))
-		for j := len(runas) - 1; j >= 0; j-- {
-			palavraInvertida.WriteRune(runas[j])
-		}
+		palavraInvertida := invertePalavraRunas([]rune(palavra))
 
 		if i != 0 {
 			resultado.WriteString(" ")
 		}
 
-		resultado.WriteString(palavraInvertida.String())
+		resultado.WriteString(palavraInvertida)
 	}
 
 	return resultado.String()
@@ -54,14 +48,9 @@ func inverterOrdemECaracteres(frase string) string {
 	var resultado strings.Builder
 	resultado.Grow(len(palavras))
 	for i := len(palavras) - 1; i >= 0; i-- {
-		runas := []rune(palavras[i])
+		palavraInvertida := invertePalavraRunas([]rune(palavras[i]))
 
-		var palavraInvertida strings.Builder
-		for j := len(runas) - 1; j >= 0; j-- {
-			palavraInvertida.WriteRune(runas[j])
-		}
-
-		resultado.WriteString(palavraInvertida.String())
+		resultado.WriteString(palavraInvertida)
 		if i != 0 {
 			resultado.WriteString(" ")
 		}
@@ -79,6 +68,17 @@ func inverterAcumulando(frase string) string {
 	}
 
 	return invertida
+}
+
+func invertePalavraRunas(runas []rune) string {
+	var palavraInvertida strings.Builder
+	palavraInvertida.Grow(len(runas))
+
+	for j := len(runas) - 1; j >= 0; j-- {
+		palavraInvertida.WriteRune(runas[j])
+	}
+
+	return palavraInvertida.String()
 }
 
 func concluirInversoes(resultado string) {
