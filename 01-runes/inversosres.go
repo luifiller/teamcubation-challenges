@@ -5,7 +5,7 @@ import (
 	"strings"
 )
 
-func inverterOrdem(frase string) {
+func inverterOrdem(frase string) string {
 	fmt.Println("Invertendo ordem... ")
 	palavras := strings.Split(frase, " ")
 
@@ -18,10 +18,10 @@ func inverterOrdem(frase string) {
 		}
 	}
 
-	concluirInversoes(fraseInvertida)
+	return fraseInvertida
 }
 
-func inverterCaracteres(frase string) {
+func inverterCaracteres(frase string) string {
 	fmt.Println("Invertendo caracteres...")
 	palavras := strings.Split(frase, " ")
 
@@ -41,10 +41,10 @@ func inverterCaracteres(frase string) {
 		fraseFormatada += palavraInvertida
 	}
 
-	concluirInversoes(fraseFormatada)
+	return fraseFormatada
 }
 
-func inverterOrdemECaracteres(frase string) {
+func inverterOrdemECaracteres(frase string) string {
 	fmt.Println("Invertendo ordem e caracteres...")
 	palavras := strings.Split(frase, " ")
 
@@ -63,10 +63,10 @@ func inverterOrdemECaracteres(frase string) {
 		}
 	}
 
-	concluirInversoes(fraseFormatada)
+	return fraseFormatada
 }
 
-func inverterAcumulando(frase string) {
+func inverterAcumulando(frase string) string {
 	fmt.Println("Invertendo com método acumulativo...")
 
 	var invertida string
@@ -74,7 +74,7 @@ func inverterAcumulando(frase string) {
 		invertida = string(char) + invertida
 	}
 
-	concluirInversoes(invertida)
+	return invertida
 }
 
 func concluirInversoes(resultado string) {

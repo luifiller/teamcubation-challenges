@@ -39,8 +39,8 @@ func main() {
 		fmt.Println("+----------------------------------------------------------+")
 		fmt.Print("Digite uma frase: ")
 
-		frase, error := reader.ReadString('\n')
-		if error != nil || len(frase) == 0 {
+		frase, err := reader.ReadString('\n')
+		if err != nil || len(frase) == 0 {
 			fmt.Println("Erro ao ler a frase. Tente novamente.")
 			continue
 		}
@@ -55,8 +55,8 @@ func main() {
 		for !novaFrase {
 			exibirMenu()
 
-			opcao, error := reader.ReadString('\n')
-			if error != nil {
+			opcao, err := reader.ReadString('\n')
+			if err != nil {
 				fmt.Println("Erro ao processar opção. Tente novamente.")
 			}
 			opcao = strings.TrimSpace(opcao)
@@ -66,13 +66,17 @@ func main() {
 				fmt.Println("Saindo... Até logo!")
 				return
 			case "1":
-				inverterOrdem(frase)
+				inv := inverterOrdem(frase)
+				concluirInversoes(inv)
 			case "2":
-				inverterCaracteres(frase)
+				inv := inverterCaracteres(frase)
+				concluirInversoes(inv)
 			case "3":
-				inverterOrdemECaracteres(frase)
+				inv := inverterOrdemECaracteres(frase)
+				concluirInversoes(inv)
 			case "4":
-				inverterAcumulando(frase)
+				inv := inverterAcumulando(frase)
+				concluirInversoes(inv)
 			case "5":
 				novaFrase = true
 			default:
