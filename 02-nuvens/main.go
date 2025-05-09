@@ -9,22 +9,20 @@ import (
 )
 
 func main() {
-	numNuvens := lerQtdNuvens()
-	estadosNuvens := lerEstadosDasNuvens(numNuvens)
+	fmt.Println("+----------------------------------------------------------+")
+	fmt.Println("|                    VIAJANTE DAS NUVENS                   |")
+	fmt.Println("+----------------------------------------------------------+")
+	fmt.Print("Insira a quantidade de nuvens (entre 2 e 100): ")
+	reader := bufio.NewReader(os.Stdin)
+	numNuvens := lerQtdNuvens(reader)
+	estadosNuvens := lerEstadosDasNuvens(reader, numNuvens)
 
 	saltos := saltarEmNuvens(estadosNuvens)
 	fmt.Printf("Número de saltos: %d \n", saltos)
 }
 
-func lerQtdNuvens() int {
-	reader := bufio.NewReader(os.Stdin)
-
+func lerQtdNuvens(reader *bufio.Reader) int {
 	for {
-		fmt.Println("+----------------------------------------------------------+")
-		fmt.Println("|                    VIAJANTE DAS NUVENS                   |")
-		fmt.Println("+----------------------------------------------------------+")
-		fmt.Print("Insira a quantidade de nuvens (entre 2 e 100): ")
-
 		qtdNuvens, err := reader.ReadString('\n')
 		if err != nil {
 			fmt.Println("Erro ao criar quantidade de nuvens.")
@@ -47,9 +45,7 @@ func lerQtdNuvens() int {
 	}
 }
 
-func lerEstadosDasNuvens(qtdNuvens int) []int {
-	reader := bufio.NewReader(os.Stdin)
-
+func lerEstadosDasNuvens(reader *bufio.Reader, qtdNuvens int) []int {
 	for {
 		fmt.Printf("Insira os %d estados das nuvens (0 = segura, 1 = perigosa), separados por espaço: ", qtdNuvens)
 		estadosNuvens, err := reader.ReadString('\n')
