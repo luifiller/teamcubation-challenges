@@ -113,16 +113,20 @@ func SomaDigitos(numero string) (int, error) {
 }
 
 func IsPalindromo(input string) bool {
-	limpo := ""
+	var limpo strings.Builder
+	limpo.Grow(len(input))
+
 	for _, char := range input {
 		if unicode.IsLetter(char) || unicode.IsDigit(char) {
-			limpo += strings.ToLower(string(char))
+			limpo.WriteRune(unicode.ToLower(char))
 		}
 	}
 
-	tamanho := len(limpo)
-	for i := 0; i < tamanho/2; i++ {
-		if limpo[i] != limpo[tamanho-1-i] {
+	runas := []rune(limpo.String())
+	tamanho := len(runas)
+
+	for i := range tamanho / 2 {
+		if runas[i] != runas[tamanho-1-i] {
 			return false
 		}
 	}
