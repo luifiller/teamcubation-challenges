@@ -7,7 +7,7 @@ import (
 
 type Pokemon struct {
 	Name      string
-	Type      []string
+	Types     []string
 	Level     int
 	EvolvesTo string
 }
@@ -21,4 +21,8 @@ func (p *Pokemon) Evolve() error {
 	p.Name = p.EvolvesTo
 
 	return nil
+}
+
+func (p Pokemon) String() string {
+	return fmt.Sprintf("Pokemon: %s\n Informações: \n Nível: %d \n Tipos: %v \n Próxima evolução: %s \n", p.Name, p.Level, p.Types, p.EvolvesTo)
 }
