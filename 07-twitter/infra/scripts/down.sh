@@ -40,7 +40,7 @@ else
     echo -e "${CYAN}🛑 Parando todos os containers...${NC}"
     
     # Parando todos os containers
-    if docker compose down; then
+    if docker compose down -v; then
         echo -e "${GREEN}✅ Todos os containers foram parados e removidos com sucesso!${NC}"
     else
         echo -e "${RED}❌ Falha ao parar e remover os containers.${NC}"
