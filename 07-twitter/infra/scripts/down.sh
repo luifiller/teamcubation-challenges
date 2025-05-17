@@ -15,6 +15,21 @@ then
     exit 1
 fi
 
+# Pergunta se o usuário deseja remover TUDO (containers, volumes, imagens, redes)
+echo -e "${CYAN}Deseja remover também TODOS os volumes, imagens e redes do projeto? (y/n)${NC}"
+read -r resposta
+
+if [[ "$resposta" =~ ^[Yy]$ ]]; then
+    echo -e "${CYAN}🧹 Removendo todos os containers, volumes, imagens e redes do projeto...${NC}"
+    if docker compose down -v --rmi all --remove-orphans; then
+        echo -e "${GREEN}✅ Todos os containers, volumes, imagens e redes do projeto foram removidos com sucesso!${NC}"
+    else
+        echo -e "${RED}❌ Falha ao remover containers, volumes, imagens ou redes.${NC}"
+        exit 1
+    fi
+    exit 0
+fi
+
 # Obtendo os IDs dos containers em execução
 containers=$(docker ps -q)
 
