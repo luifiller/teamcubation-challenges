@@ -23,7 +23,6 @@ Para este, está sendo criado um projeto seguindo uma arquitetura hexagonal com 
   cmd/
     server/
       .air.toml         # Live reload
-      .env              # Variáveis de ambiente (ex. banco de dados)
       main.go           # Inicializar a aplicação
   core/
     models/             # Entidades
@@ -37,7 +36,12 @@ Para este, está sendo criado um projeto seguindo uma arquitetura hexagonal com 
         tweet_service.go
         user_service.go
   infra/                # Configurações de Docker Compose
+    db/                 # Inicialização do BD
+      init.sql
     scripts/            # Scripts Bash do Docker Compose
+      down.sh           # Derrubar e limpar containers
+      up.sh             # Subir novo container e inicializar BD
+    .env              # Variáveis de ambiente (ex. banco de dados)
     docker-compose.yml
   internal/
     adapters/           # Implementações (adapters)
@@ -79,7 +83,7 @@ cd factory-meli/07-twitter
 
 2. **Configure as variáveis de ambiente:**
 
-Edite o arquivo `.env` que está no caminho `cmd/server/`.
+Adicione um arquivo `.env` dentro do caminho `infra/`.
 Como exemplo, pode utilizar os seguintes dados (ajuste se necessário):
 
 ```
@@ -143,8 +147,16 @@ Sucesso ao se conectar com o Banco de Dados!
 
 Para parar e remover os containers do banco, execute o seguinte dentro do terminal WSL:
 
+- Para parar containers específicos, passe o nome deles:
+
 ```bash
-./scripts/down.sh
+./scripts/down.sh <container1> <container2>
+```
+
+- Para parar todos os containers:
+
+```bash
+./scripts/down.sh container1 container
 ```
 
 ---
