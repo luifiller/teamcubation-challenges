@@ -24,7 +24,7 @@ if docker compose up -d; then
     # Executa o script SQL para criar as tabelas, se existir
     if [ -f "../db/up.sql" ]; then
         echo -e "${CYAN}📦 Executando script de criação de tabelas...${NC}"
-        docker exec -i twitter-test-db psql -U luifiller -d twitter < infra/db/init.sql
+        docker exec -i twitter-test-db psql -U "$POSTGRES_USER" -d "$POSTGRES_DB" < infra/db/init.sql
         
         if [ $? -eq 0 ]; then
             echo -e "${GREEN}✅ Script SQL executado com sucesso!${NC}"
